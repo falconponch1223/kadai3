@@ -1,0 +1,96 @@
+<body>
+  <p class="notice"><%= notice %></p>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-3">
+        <section class="User-Info">
+          <h2>User Info</h2>
+          <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg" %>
+          <table>
+            <tbody>
+              <tr>
+                <th>name</th>
+                <th class="user-name">
+                  <%= @user.name %></th>
+              </tr>
+              <tr>
+                <th>introduction</th>
+                <th><%= @user.introduction %></th>
+              </tr>
+            </tbody>
+          </table>
+          <% if @user.id == current_user.id %>
+            <div class="row">
+              <a class="col-xs-12 btn"><%= link_to 'user-edit', edit_user_path(@user), class: "btn btn-default" %></a>
+            </div>
+          <% end %>
+        </section>
+        
+        <section class="new-book">
+        <h2>New book</h2>
+
+          <% if @book.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@book.errors.count, "error") %> prohibited this book from being saved:</h2>
+
+              <ul>
+                <% @book.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+
+        <!-- form for -->
+          <%= form_for(@book) do |f| %>
+            <h4>title</h4>
+            <%= f.text_field :title %>
+            <h4>opinion</h4>
+            <div>
+              <%= f.text_area :body %>
+            </div>
+
+            <%= f.submit 'Create Book' %>
+
+          <% end %>
+        </section>
+      </div>
+      <div class=col-xs-9>
+
+          <section class="Books">
+            <h2>Book detail</h2>
+            <table>
+             <thead>
+              <tr>
+                <th>title</th>
+                <th>opinion</th>
+                <th colspan="3"></th>
+              </tr>
+             </thead>
+              <tbody>
+                  <tr>
+                    <td>
+                      <a>
+                        <%= link_to (attachment_image_tag @book.user, :profile_image, :fill, 100, 100, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg"),user_path(@book.user) %>
+                        <br>
+                        <%= link_to @book.user.name ,user_path(@book.user) %>
+                      </a>
+                    </td>
+                    <td class="book-title"><%= @book.title %></td>
+                    <td class="book-body"><%= @book.body %></td>
+                    <% if @book.user.id ==current_user.id %>
+                    <td>
+                      <%= link_to "Edit", edit_book_path(@book),class: "btn-sm btn-success" %>
+                      </td>
+                      <% end %>
+                      <% if @book.user.id ==current_user.id %>
+                    <td><%= link_to "Destroy", book_path(@book), class: "btn-sm btn-danger",  method: :delete, "data-confirm" => "本当に消しますか?"  %></td>
+                      <% end %>
+                  </tr>
+              </tbody>
+            </table>
+          </section>
+      </div>
+    </div>
+  </div>
+</body>
