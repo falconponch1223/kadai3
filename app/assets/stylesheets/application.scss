@@ -15,3 +15,12 @@
  */
 @import "bootstrap-sprockets";  /*ここを追加*/
 @import "bootstrap";
+
+.main {
+  padding-top: 70px;
+  text-align: center;
+}
+.title {
+  color: white;
+  font-size: 20px;
+}
