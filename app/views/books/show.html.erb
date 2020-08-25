@@ -4,24 +4,26 @@
     <div class="row">
       <div class="col-xs-3">
         <section class="User-Info">
-          <h2>User Info</h2>
-          <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg" %>
+          <h2>User info</h2>
+          <div class="user-photo clearfix">
+          <%= attachment_image_tag @book.user, :profile_image, :fill, 60, 60, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg" %>
+          </div>
           <table>
             <tbody>
               <tr>
                 <th>name</th>
                 <th class="user-name">
-                  <%= @user.name %></th>
+                  <%= @book.user.name %></th>
               </tr>
               <tr>
                 <th>introduction</th>
-                <th><%= @user.introduction %></th>
+                <th><%= @book.user.introduction %></th>
               </tr>
             </tbody>
           </table>
-          <% if @user.id == current_user.id %>
+          <% if @book.user.id == current_user.id %>
             <div class="row">
-              <a class="col-xs-12 btn"><%= link_to 'user-edit', edit_user_path(@user), class: "btn btn-default" %></a>
+              <a><%= link_to '', edit_user_path(@user), class:"col-xs-12 btn btn-default glyphicon glyphicon-wrench" %></a>
             </div>
           <% end %>
         </section>
@@ -62,6 +64,7 @@
             <table>
              <thead>
               <tr>
+                 <th colspan="1"></th>
                 <th>title</th>
                 <th>opinion</th>
                 <th colspan="3"></th>

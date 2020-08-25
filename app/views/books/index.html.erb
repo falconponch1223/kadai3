@@ -5,7 +5,9 @@
       <div class="col-xs-3">
         <section class="User-Info">
           <h2>User Info</h2>
+          <div class="user-photo clearfix">
           <%= attachment_image_tag @user, :profile_image, :fill, 60, 60, format: 'jpeg', class: "img-circle pull-left profile-img", fallback: "no_image.jpg" %>
+          </div>
           <table>
             <tbody>
               <tr>
@@ -21,7 +23,7 @@
           </table>
           <% if @user.id == current_user.id %>
             <div class="row">
-              <a class="col-xs-12 btn"><%= link_to 'user-edit', edit_user_path(@user), class: "btn btn-default" %></a>
+              <a><%= link_to '', edit_user_path(@user), class:"col-xs-12 btn btn-default glyphicon glyphicon-wrench" %></a>
             </div>
           <% end %>
         </section>

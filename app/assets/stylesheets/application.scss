@@ -24,3 +24,8 @@ padding-top: 70px;
   color: white;
   font-size: 20px;
 }
+.clearfix::after {
+  content: "";
+  display: block;
+  clear: both;
+}
